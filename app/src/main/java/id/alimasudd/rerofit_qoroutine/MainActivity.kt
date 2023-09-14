@@ -16,5 +16,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val quotesApi = RetrofitHelper.getInstance().create(QuotesApi::class.java)
+        // launching a new coroutine
+        GlobalScope.launch {
+            val result = quotesApi.getQuotes()
+            if (result != null)
+            // Checking the results
+                Log.d("ayush: ", result.body().toString())
+        }
     }
 }
